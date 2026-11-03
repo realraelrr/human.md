@@ -7,38 +7,63 @@
 
 ---
 
-## 为什么需要 `HUMAN.md`？（机器与人类的镜像非对称）
+## 一分钟速览：人类在 AI 协作中最常踩的 4 个坑
 
-在人机协作闭环中，**模型的上下文窗口**与**人类的生物大脑**遵循完全相反的唤醒机制：
+想象你（**房东**）请了一位手脚快如闪电、什么活都会干、但特别爱看你脸色行事的 **“超级包工头（AI）”** 来装修你的新房（完整版见 [`human/HUMAN-simplified.md`](./human/HUMAN-simplified.md)，跨学科概念版见 [`human/HUMAN.md`](./human/HUMAN.md)）：
 
-1. **给 AI 的协议（`agents/` & `chatbots/`）—— 去图腾化的高精度动作契约**
-   - 模型每轮对话都会机械重读 System Prompt。若在提示词中堆砌抽象哲学口号，会引发原生推理模型的“词汇泄漏（掉书袋）”与自适应推理算力空转。
-   - 因此，给模型的文档剥离了一切修辞图腾，仅保留模型无法自行推断的**工具时序（先检索后落笔）、自治与不可逆边界、反作弊验证与快慢算力分流**。
-2. **给自己的协议（`human/`）—— 唤醒隐性知识的元概念与单主线类比**
-   - 人类不会在每次敲回车前背诵操作手册。机械的条文看一遍就会忘；真正能在关键决策瞬间唤醒人类直觉的，只有两种载体：
-     - **[`HUMAN.md`](./human/HUMAN.md)（主文档 · 跨学科高维概念版）**：通过 `X-Y Problem`、`确认偏误`、`钢铁侠论证`、`委托-代理问题`、`单向门/双向门`、`沉没成本谬误` 等真实存在的跨学科概念锚点，一键点亮大脑中已有的隐性知识库。
-     - **[`HUMAN-simplified.md`](./human/HUMAN-simplified.md)（简化版 · “西瓜书”式单主线类比）**：全篇仅用**“房东请超级包工头装修新房”**这一个生活场景从头串到尾（开工交底 → 审设计图 → 现场施工 → 返工止损），零专业术语，任何无技术背景的人都能一秒读懂并形成肌肉记忆。
+1. **【开工交底】只提“居住要求和底线”，别夺过铲子教他怎么和泥（反 `X-Y Problem`）**
+   - 告诉他“老人住、要防滑隔音、预算三万”，别外行指导内行规定“水泥沙子几比几”；非要指定“装地暖”时，顺嘴补一句“我是怕老人冬天脚冷”，万一层高不够，他才能替你想到更好的暖气片方案。
+2. **【审设计图】别诱导他顺着你吹捧，学会找“隔壁师傅”唱对台戏（克服 `确认偏误` & `红队盲测`）**
+   - 别问“把阳台砸了是不是特敞亮？”，要反问“如果打通阳台，住进去三年后最让人后悔的坑是什么？”；重大方案捂住名字交给另一个干净窗口的 AI 挑刺，让两个行家唱对台戏。
+3. **【现场施工】换窗帘随他折腾，砸承重墙必须亲眼验看（区分 `双向门` 与 `单向门`）**
+   - 随时能重来的小事彻底放权，别让他每拧一颗螺丝都来请示；但碰到“砸承重墙、埋暗管、删老数据、改核心接口”这种没法后悔的**单向门**，必须叫停施工亲眼核验水压与钢筋，绝不做盲目签字的橡皮图章。
+4. **【返工止损】墙面越补越花时，别心疼那点旧涂料，铲平重刷最快（对抗 `信息熵增` & `沉没成本谬误`）**
+   - 同一窗口来回拉锯十几个回合、越改越乱时，说明这面墙的腻子已经彻底花了。别在烂摊子上糊第六层补丁——直接抄下有用的结论，开一个全新的干净窗口从头刷。
 
 ---
 
-## 目录结构
+## 核心设计哲学：机器与人类的“镜像非对称”
+
+在人机协作闭环中，**模型的上下文窗口**与**人类的生物大脑**遵循完全相反的唤醒机制：
+
+* **给 AI 的协议（[`agents/`](./agents/) & [`chatbots/`](./chatbots/)）—— 去图腾化的高精度动作契约**
+  - 模型每轮对话都会机械重读 System Prompt。若在提示词中堆砌抽象哲学口号，会引发原生推理模型的“词汇泄漏（掉书袋）”与自适应推理算力空转。
+  - 因此，给模型的文档剥离了一切修辞图腾，仅保留模型无法自行推断的**工具时序（先检索后落笔）、反停滞自治、单向门硬拦截、防过度测试与快慢算力分流**。
+* **给自己的协议（[`human/`](./human/)）—— 唤醒隐性知识的元概念与单主线类比**
+  - 人类不会在每次敲回车前背诵操作清单。机械的条文看一遍就会忘；真正能在关键决策瞬间唤醒人类直觉的，只有**高维跨学科概念锚点**（[`HUMAN.md`](./human/HUMAN.md)）与**“西瓜书”式一以贯之的具象类比**（[`HUMAN-simplified.md`](./human/HUMAN-simplified.md)）。
+
+---
+
+## 目录结构与一键安装
 
 ```text
-.
+human.md/
 ├── human/                          # 面向人类协作者（Human-in-the-Loop）
 │   ├── HUMAN.md                    # 主文档：跨学科高维概念版（唤醒隐性认知）
 │   └── HUMAN-simplified.md         # 简化版：“西瓜书”式装修房子单主线通俗版
-├── agents/                         # 面向本地 Coding Agents 的全局执行契约
+├── agents/                         # 面向主流本地 Coding Agents 的全局执行契约
 │   ├── gemini/
-│   │   └── GEMINI.md               # Google Antigravity / Gemini 4 专用契约
-│   ├── codex/                      # [WIP] OpenAI Codex 专用契约
-│   ├── claude-code/                # [WIP] Anthropic Claude Code 专用契约
-│   ├── cursor/                     # [WIP] Cursor 专用契约
-│   ├── windsurf/                   # [WIP] Windsurf 专用契约
-│   └── opencode/                   # [WIP] OpenCode 专用契约
+│   │   └── GEMINI.md               # Google Antigravity / Gemini 4 专用契约 (~/.gemini/GEMINI.md)
+│   ├── codex/
+│   │   └── AGENTS.md               # OpenAI Codex / GPT-6 专用契约 (~/.codex/AGENTS.md)
+│   └── claude-code/
+│       └── CLAUDE.md               # Anthropic Claude Code / Claude 5.5 专用契约 (~/.claude/CLAUDE.md)
 ├── chatbots/                       # 面向网页端/对话式大模型的全局参谋契约
 │   └── CHATBOT.md                  # ChatGPT / Claude / Gemini Web 通用自定义指令
 └── LICENSE                         # MIT License
+```
+
+### 快速安装（Coding Agents）
+
+```bash
+# 1. Google Antigravity / Gemini
+cp agents/gemini/GEMINI.md ~/.gemini/GEMINI.md
+
+# 2. OpenAI Codex
+cp agents/codex/AGENTS.md ~/.codex/AGENTS.md
+
+# 3. Anthropic Claude Code
+cp agents/claude-code/CLAUDE.md ~/.claude/CLAUDE.md
 ```
 
 ---
