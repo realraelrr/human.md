@@ -28,7 +28,7 @@
 
 * **给 AI 的协议（[`agents/`](./agents/) & [`chatbots/`](./chatbots/)）—— 去图腾化的高精度动作契约**
   - 模型每轮对话都会机械重读 System Prompt。若在提示词中堆砌抽象哲学口号，会引发原生推理模型的“词汇泄漏（掉书袋）”与自适应推理算力空转。
-  - 因此，给模型的文档剥离了一切修辞图腾，仅保留模型无法自行推断的**工具时序（先检索后落笔）、反停滞自治、单向门硬拦截、防过度测试与快慢算力分流**。
+  - 因此，给模型的文档剥离了一切修辞图腾，仅保留模型无法自行推断的**工具时序（先检索后落笔）、反停滞自治、单向门硬拦截、防过度测试、快慢算力分流与上下文劣化主动熔断**。
 * **给自己的协议（[`human/`](./human/)）—— 唤醒隐性知识的元概念与单主线类比**
   - 人类不会在每次敲回车前背诵操作清单。机械的条文看一遍就会忘；真正能在关键决策瞬间唤醒人类直觉的，只有**高维跨学科概念锚点**（[`HUMAN.md`](./human/HUMAN.md)）与**“西瓜书”式一以贯之的具象类比**（[`HUMAN-simplified.md`](./human/HUMAN-simplified.md)）。
 
@@ -43,11 +43,11 @@ human.md/
 │   └── HUMAN-simplified.md         # 简化版：“西瓜书”式装修房子单主线通俗版
 ├── agents/                         # 面向主流本地 Coding Agents 的全局执行契约
 │   ├── gemini/
-│   │   └── GEMINI.md               # Google Antigravity / Gemini 4 专用契约 (~/.gemini/GEMINI.md)
+│   │   └── GEMINI.md               # Google Antigravity / Gemini 全局契约 (~/.gemini/GEMINI.md)
 │   ├── codex/
-│   │   └── AGENTS.md               # OpenAI Codex / GPT-6 专用契约 (~/.codex/AGENTS.md)
+│   │   └── AGENTS.md               # OpenAI Codex 全局契约 (~/.codex/AGENTS.md)
 │   └── claude-code/
-│       └── CLAUDE.md               # Anthropic Claude Code / Claude 5.5 专用契约 (~/.claude/CLAUDE.md)
+│       └── CLAUDE.md               # Anthropic Claude Code 全局契约 (~/.claude/CLAUDE.md)
 ├── chatbots/                       # 面向网页端/对话式大模型的全局参谋契约
 │   └── CHATBOT.md                  # ChatGPT / Claude / Gemini Web 通用自定义指令
 └── LICENSE                         # MIT License
@@ -55,15 +55,17 @@ human.md/
 
 ### 快速安装（Coding Agents）
 
+在克隆后的仓库根目录下执行，通过软链接（Symlink）将仓库作为唯一事实源（SSOT）挂载至本地全局配置：
+
 ```bash
 # 1. Google Antigravity / Gemini
-cp agents/gemini/GEMINI.md ~/.gemini/GEMINI.md
+ln -sf "$PWD/agents/gemini/GEMINI.md" ~/.gemini/GEMINI.md
 
 # 2. OpenAI Codex
-cp agents/codex/AGENTS.md ~/.codex/AGENTS.md
+ln -sf "$PWD/agents/codex/AGENTS.md" ~/.codex/AGENTS.md
 
 # 3. Anthropic Claude Code
-cp agents/claude-code/CLAUDE.md ~/.claude/CLAUDE.md
+ln -sf "$PWD/agents/claude-code/CLAUDE.md" ~/.claude/CLAUDE.md
 ```
 
 ---
@@ -75,7 +77,7 @@ cp agents/claude-code/CLAUDE.md ~/.claude/CLAUDE.md
 | **1. 破题与求真** | **反 X-Y Problem**：给出真实终局目标与约束底线，不微操具体步骤。 | **先检索后落笔 & 动态核验**：查证本地上下文与一手官方信源，发现前提缺陷直陈更优解。 |
 | **2. 推演与去偏** | **零锚定提问 & 红队交叉审查**：隐去个人倾向，用独立会话对冲确认偏误。 | **严守归因红线**：拒绝迎合与事后合理化，主动构建最强反方论点与反证条件。 |
 | **3. 决策与边界** | **守住单向门裁判权**：可逆细节充分放权，不可逆边界亲自核验，克服自动化偏见。 | **默认端到端闭环**：可逆任务直接落地，触及删数、破契约、核心依赖与安全/计费边界硬拦截。 |
-| **4. 控熵与止损** | **破除沉没成本谬误**：长会话信噪比劣化时果断清空重开，触发双环学习修补规则。 | **最小侵袭 & 精准验证**：禁投机抽象与静默吞错，局部验证防过度测试，简单任务跳过冗余推理。 |
+| **4. 控熵与止损** | **破除沉没成本谬误**：长会话信噪比劣化时果断清空重开，触发双环学习修补规则。 | **最小侵袭、精准验证与主动熔断**：禁投机抽象与静默吞错，局部验证防过度测试；连续故障或长会话劣化时主动输出「已验证事实与阻塞点摘要」提示重开。 |
 
 ---
 
